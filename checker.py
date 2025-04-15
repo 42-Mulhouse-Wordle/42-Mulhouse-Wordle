@@ -27,6 +27,8 @@ def check_word(word, guess, word_lib):
 	guess = guess.lower()
 	if not is_valid_length(guess) or not is_exist(guess, word_lib):
 		return word_lib
+	word_lib.add_guess(guess)
+	word_lib.get_previous_guesses(word)
 	if is_matching(word, guess, word_lib):
 		word_lib.guessing = False
 		return word_lib
