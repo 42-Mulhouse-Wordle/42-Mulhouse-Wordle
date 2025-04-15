@@ -1,6 +1,6 @@
 import random
-from checker import check_word, is_valid_length
-from dictionary_handler import WordLib, fill_wordLib
+from checker import check_word
+from dictionary_handler import fill_wordLib
 
 GUESS_PROMPT = "Guess a 5 letters word: "
 WIN_MESSAGE = "Congratulations! You guessed the word."
