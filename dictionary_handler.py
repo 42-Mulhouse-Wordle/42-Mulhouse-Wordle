@@ -38,6 +38,33 @@ def print_word(guess, word):
 		i += 1
 	print()
 
+
+def print_word(guess, word):
+	i = 0
+	l = 0
+	j = []
+	k = []
+	tmp = guess
+	for char in guess:
+		if char in word and char == word[l]:
+			word = word[:l] + word[l + 1:]
+			j.append(char)
+			k.append(i)
+			l -= 1
+		l += 1
+		i += 1
+	i = 0
+	for char in tmp:
+		if i in k:
+			print('\033[92m' + char.upper() + '\033[0m', end=' ')
+		elif char in word:
+			print('\033[93m' + char.upper() + '\033[0m', end=' ')
+			j.append(char)
+		else:
+			print('\033[90m' + char.upper() + '\033[0m', end=' ')
+		i += 1
+	print()
+
 def fill_wordLib():
 	word_lib = WordLib()
 	with open(FILENAME, OPEN_MODE) as file:
