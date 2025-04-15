@@ -1,3 +1,6 @@
+FILENAME = 'words.txt'
+OPEN_MODE = 'r'
+
 class WordLib:
 	def __init__(self):
 		self.words = []
@@ -10,7 +13,7 @@ class WordLib:
 
 def fill_wordLib():
 	word_lib = WordLib()
-	with open('words.txt','r') as file:
+	with open(FILENAME, OPEN_MODE) as file:
 		for line in file:
 			line = line.strip()
 			if line:
