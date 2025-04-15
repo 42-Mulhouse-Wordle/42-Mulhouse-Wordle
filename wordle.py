@@ -12,7 +12,7 @@ def run_game(word, word_lib):
 def main():
 	word_lib = fill_wordLib()
 	word = random.choice(word_lib.words)
-	word = "apple"
 	run_game(word, word_lib)
+	print(word)
 
 main()
