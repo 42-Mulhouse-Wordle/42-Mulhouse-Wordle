@@ -25,25 +25,10 @@ class WordLib:
 
 def print_word(guess, word):
 	i = 0
-	j = []
-	for char in guess:
-		if char in word and char not in j:
-			if char == word[i]:
-				print('\033[92m' + char.upper() + '\033[0m', end=' ')
-			else:
-				print('\033[93m' + char.upper() + '\033[0m', end=' ')
-			j.append(char)
-		else:
-			print('\033[90m' + char.upper() + '\033[0m', end=' ')
-		i += 1
-	print()
-
-
-def print_word(guess, word):
-	i = 0
 	l = 0
 	j = []
 	k = []
+	m = []
 	tmp = guess
 	for char in guess:
 		if char in word and char == word[l]:
@@ -57,9 +42,9 @@ def print_word(guess, word):
 	for char in tmp:
 		if i in k:
 			print('\033[92m' + char.upper() + '\033[0m', end=' ')
-		elif char in word:
+		elif char in word and char not in m:
 			print('\033[93m' + char.upper() + '\033[0m', end=' ')
-			j.append(char)
+			m.append(char)
 		else:
 			print('\033[90m' + char.upper() + '\033[0m', end=' ')
 		i += 1
