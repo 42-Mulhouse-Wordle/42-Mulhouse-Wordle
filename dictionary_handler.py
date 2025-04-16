@@ -26,21 +26,16 @@ class WordLib:
 def print_word(guess, word):
 	i = 0
 	l = 0
-	j = []
 	k = []
-	m = []
-	tmp = guess
 	for char in guess:
 		if char in word and char == word[l]:
 			word = word[:l] + word[l + 1:]
-			j.append(char)
 			k.append(i)
 			l -= 1
 		l += 1
 		i += 1
 	i = 0
-	l = 0
-	for char in tmp:
+	for char in guess:
 		if i in k:
 			print('\033[92m' + char.upper() + '\033[0m', end=' ')
 		elif char in word:
