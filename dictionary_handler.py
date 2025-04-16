@@ -8,6 +8,7 @@ FILE_NOT_FOUND = "Error: The file '{}' was not found."
 IO_ERROR = "Error: An IOError occurred. Details: {}"
 DIC_CORRUPT_ERROR = "The dictionary file is corrupted: '{}' at line {}"
 TITLE = ":writing_hand: :brain: :bulb: [info]Wordle[/] :bulb: :brain: :writing_hand:\n"
+DIC_WC = "Total words availableb: {}"
 
 class WordLib:
 	def __init__(self):
@@ -105,7 +106,7 @@ def fill_wordLib():
         return None
     return word_lib
 
-def print_screen():
+def print_screen(n):
 	custom_theme = Theme(
 	    {"info": "cyan", "placed": "bold bright_green", "correct": "bold bright_yellow", "wrong": "bright_black"}
 	)
@@ -122,4 +123,5 @@ def print_screen():
 	console.print()
 	console.print(" ".join(styled_alphabet), justify="center")
 	console.print()
+	print(DIC_WC.format(n))
 	return console
