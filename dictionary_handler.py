@@ -1,8 +1,12 @@
 from rich.console import Console
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 08f1125 (Feature: Add justifed alphabet)
+=======
+
+>>>>>>> 3d7adcf (Chore: clean constants in code)
 FILENAME = 'words.txt'
 OPEN_MODE = 'r'
 NB_TRIES = 6
@@ -32,9 +36,12 @@ class WordLib:
 		styled_alphabet = []
 		for letter in range(ord('a'), ord('z') + 1):
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 			style = ""
 >>>>>>> 08f1125 (Feature: Add justifed alphabet)
+=======
+>>>>>>> 3d7adcf (Chore: clean constants in code)
 			if chr(letter) in self.green:
 				style = "bold bright_green"
 			elif chr(letter) in self.yellow:
