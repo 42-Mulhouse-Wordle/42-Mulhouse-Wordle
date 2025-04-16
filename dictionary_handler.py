@@ -1,7 +1,10 @@
 from rich.console import Console
+
 FILENAME = 'words.txt'
 OPEN_MODE = 'r'
 NB_TRIES = 6
+FILE_NOT_FOUND = "Error: The file '{}' was not found."
+IO_ERROR = "Error: An IOError occurred. Details: {}"
 
 class WordLib:
 	def __init__(self):
@@ -24,7 +27,6 @@ class WordLib:
 			self = print_word(guess, word, self)
 		styled_alphabet = []
 		for letter in range(ord('a'), ord('z') + 1):
-			style = ""
 			if chr(letter) in self.green:
 				style = "bold bright_green"
 			elif chr(letter) in self.yellow:
@@ -75,9 +77,9 @@ def fill_wordLib():
                 if line:
                     word_lib.add_word(line)
     except FileNotFoundError:
-        print(f"Error: The file '{FILENAME}' was not found.")
+        print(FILE_NOT_FOUND.format(FILENAME))
         return None
     except IOError as e:
-        print(f"Error: An IOError occurred. Details: {e}")
+        print(IO_ERROR.format(e))
         return None
     return word_lib

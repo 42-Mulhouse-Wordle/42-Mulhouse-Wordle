@@ -7,6 +7,8 @@ from dictionary_handler import fill_wordLib
 
 GUESS_PROMPT = "input: "
 TITLE = ":writing_hand: :brain: :bulb: [info]Wordle[/] :bulb: :brain: :writing_hand:\n"
+HEADER = "Guesses"
+LOSS_MESSAGE = "You lost, the word was: "
 
 def print_console():
 	custom_theme = Theme(
@@ -16,7 +18,7 @@ def print_console():
 	console.clear()
 	console.rule(TITLE)
 	table = Table()
-	table.add_column("Guesses", style="wrong", justify="center")
+	table.add_column(HEADER, style="wrong", justify="center")
 	for i in range(6):
 		table.add_row("- - - - -")
 	console.print(table, justify="center")
@@ -32,7 +34,7 @@ def run_game(word, word_lib):
 		guess = input(GUESS_PROMPT)
 		word_lib = check_word(word, guess, word_lib)
 	if word_lib.tries_left == 0:
-		print("You lost, the word was: " + word.upper())
+		print(LOSS_MESSAGE + word.upper())
 
 def main():
 	word_lib = fill_wordLib()

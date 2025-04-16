@@ -19,7 +19,7 @@ def is_exist(guess, word_lib):
 
 def is_matching(word, guess, word_lib):
 	if word == guess:
-		print(WIN_MESSAGE.format(word.upper(), -word_lib.tries_left + 7))
+		print(WIN_MESSAGE.format(word.upper(), -word_lib.tries_left + NB_TRIES_DISPLAYED))
 		return True
 	return False
 
