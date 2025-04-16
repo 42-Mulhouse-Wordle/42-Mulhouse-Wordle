@@ -1,12 +1,5 @@
 from rich.console import Console
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
->>>>>>> 08f1125 (Feature: Add justifed alphabet)
-=======
-
->>>>>>> 3d7adcf (Chore: clean constants in code)
 FILENAME = 'words.txt'
 OPEN_MODE = 'r'
 NB_TRIES = 6
@@ -35,13 +28,6 @@ class WordLib:
 			self = print_word(guess, word, self)
 		styled_alphabet = []
 		for letter in range(ord('a'), ord('z') + 1):
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-			style = ""
->>>>>>> 08f1125 (Feature: Add justifed alphabet)
-=======
->>>>>>> 3d7adcf (Chore: clean constants in code)
 			if chr(letter) in self.green:
 				style = "bold bright_green"
 			elif chr(letter) in self.yellow:
@@ -60,27 +46,29 @@ def print_word(guess, word, obj):
 	i = 0
 	l = 0
 	k = []
-	for char in guess:
-		if char in word and char == word[l]:
+	for letter in guess:
+		if letter in word and letter == word[l]:
 			word = word[:l] + word[l + 1:]
-			obj.green.append(char)
+			obj.green.append(letter)
 			k.append(i)
 			l -= 1
 		l += 1
 		i += 1
 	i = 0
-	for char in guess:
+	styled_word = []
+	for letter in guess:
 		if i in k:
-			print('\033[92m' + char.upper() + '\033[0m', end=' ')
-		elif char in word:
-			obj.yellow.append(char)
-			print('\033[93m' + char.upper() + '\033[0m', end=' ')
-			word = word[:word.find(char)] + word[word.find(char) + 1:]
+			style = "bold bright_green"
+		elif letter in word:
+			obj.yellow.append(letter)
+			style = "bold bright_yellow"
+			word = word[:word.find(letter)] + word[word.find(letter) + 1:]
 		else:
-			obj.grey.append(char)
-			print('\033[90m' + char.upper() + '\033[0m', end=' ')
+			obj.grey.append(letter)
+			style = "bold bright_black"
+		styled_word.append(f"[{style}]{letter.upper()}[/]")
 		i += 1
-	print()
+	Console().print(" ".join(styled_word), justify="center")
 	return obj
 
 def fill_wordLib():
