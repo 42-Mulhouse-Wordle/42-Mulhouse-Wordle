@@ -1,5 +1,4 @@
 import random
-import readline
 from rich.console import Console
 from checker import check_word
 from dictionary_handler import fill_wordLib, print_screen
