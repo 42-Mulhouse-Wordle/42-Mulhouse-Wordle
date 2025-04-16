@@ -4,11 +4,11 @@ from rich.console import Console
 FILENAME = 'words.txt'
 OPEN_MODE = 'r'
 NB_TRIES = 6
-FILE_NOT_FOUND = "Error: The file '{}' was not found."
-IO_ERROR = "Error: An IOError occurred. Details: {}"
-DIC_CORRUPT_ERROR = "The dictionary file is corrupted: '{}' at line {}"
+FILE_NOT_FOUND = "[bright_red]Error: The file '{}' was not found[/]"
+IO_ERROR = "[bright_red]Error: An IOError occurred. Details: {}[/]"
+DIC_CORRUPT_ERROR = "[bright_red]The dictionary file is corrupted: [/][cyan]'{}' at line {}[/]"
 TITLE = ":writing_hand: :brain: :bulb: [info]Wordle[/] :bulb: :brain: :writing_hand:\n"
-DIC_WC = "Total words availableb: {}"
+DIC_WC = "[cyan]Total words available: [/][white]{}[/]"
 
 class WordLib:
 	def __init__(self):
@@ -49,9 +49,9 @@ class WordLib:
 			else:
 				style = "normal"
 			styled_alphabet.append(f"[{style}]{chr(letter).upper()}[/]")
-		Console().print()
-		Console().print(" ".join(styled_alphabet), justify="center")
-		Console().print()
+		console.print()
+		console.print(" ".join(styled_alphabet), justify="center")
+		console.print()
 
 	def add_word(self, word):
 		self.words.append(word)
@@ -96,13 +96,13 @@ def fill_wordLib():
                 if line and len(line) == 5 and line.isalpha():
                     word_lib.add_word(line)
                 else:
-                    print(DIC_CORRUPT_ERROR.format(line, i))
+                    Console().print(DIC_CORRUPT_ERROR.format(line, i))
                     return None
     except FileNotFoundError:
-        print(FILE_NOT_FOUND.format(FILENAME))
+        Console().print(FILE_NOT_FOUND.format(FILENAME))
         return None
     except IOError as e:
-        print(IO_ERROR.format(e))
+        Console().print(IO_ERROR.format(e))
         return None
     return word_lib
 
@@ -114,6 +114,8 @@ def print_screen(n):
 	console.clear()
 	console.rule(TITLE)
 	console.print()
+	console.print(DIC_WC.format(n))
+	console.print()
 	for i in range(6):
 		console.print("- - - - -", justify="center")
 	styled_alphabet = []
@@ -123,5 +125,4 @@ def print_screen(n):
 	console.print()
 	console.print(" ".join(styled_alphabet), justify="center")
 	console.print()
-	print(DIC_WC.format(n))
 	return console
