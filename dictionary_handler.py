@@ -1,3 +1,4 @@
+from rich.console import Console
 FILENAME = 'words.txt'
 OPEN_MODE = 'r'
 NB_TRIES = 6
@@ -21,17 +22,19 @@ class WordLib:
 	def get_previous_guesses(self, word):
 		for guess in self.previous_guesses:
 			self = print_word(guess, word, self)
-		print()
-		for lettre in range(ord('a'), ord('z') + 1):
-			if chr(lettre) in self.green:
-				print('\033[92m' + chr(lettre).upper() + '\033[0m', end=' ')
-			elif chr(lettre) in self.yellow:
-				print('\033[93m' + chr(lettre).upper() + '\033[0m', end=' ')
-			elif chr(lettre) in self.grey:
-				print('\033[90m' + chr(lettre).upper() + '\033[0m', end=' ')
+		styled_alphabet = []
+		for letter in range(ord('a'), ord('z') + 1):
+			style = ""
+			if chr(letter) in self.green:
+				style = "bold bright_green"
+			elif chr(letter) in self.yellow:
+				style = "bold bright_yellow"
+			elif chr(letter) in self.grey:
+				style = "bold bright_black"
 			else:
-				print(chr(lettre).upper(), end=' ')
-		print()
+				style = "normal"
+			styled_alphabet.append(f"[{style}]{chr(letter).upper()}[/]")
+		Console().print(" ".join(styled_alphabet), justify="center")
 
 	def add_word(self, word):
 		self.words.append(word)
