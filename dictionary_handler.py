@@ -12,6 +12,7 @@ OPEN_MODE = 'r'
 NB_TRIES = 6
 FILE_NOT_FOUND = "Error: The file '{}' was not found."
 IO_ERROR = "Error: An IOError occurred. Details: {}"
+DIC_CORRUPT_ERROR = "The dictionary file is corrupted: '{}' at line {}"
 
 class WordLib:
 	def __init__(self):
@@ -86,10 +87,15 @@ def fill_wordLib():
     word_lib = WordLib()
     try:
         with open(FILENAME, OPEN_MODE) as file:
+            i = 0
             for line in file:
+                i += 1
                 line = line.strip()
-                if line:
+                if line and len(line) == 5 and line.isalpha():
                     word_lib.add_word(line)
+                else:
+                    print(DIC_CORRUPT_ERROR.format(line, i))
+                    return None
     except FileNotFoundError:
         print(FILE_NOT_FOUND.format(FILENAME))
         return None
