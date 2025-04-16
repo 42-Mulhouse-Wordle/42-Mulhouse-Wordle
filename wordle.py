@@ -19,10 +19,14 @@ def print_console():
 	console.rule(TITLE)
 	table = Table()
 <<<<<<< HEAD
+<<<<<<< HEAD
 	table.add_column(HEADER, style="wrong", justify="center")
 =======
 	table.add_column("Guesses", style="wrong", justify="center")
 >>>>>>> 08f1125 (Feature: Add justifed alphabet)
+=======
+	table.add_column(HEADER, style="wrong", justify="center")
+>>>>>>> 3d7adcf (Chore: clean constants in code)
 	for i in range(6):
 		table.add_row("- - - - -")
 	console.print(table, justify="center")
