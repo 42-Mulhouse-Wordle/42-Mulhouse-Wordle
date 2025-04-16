@@ -63,11 +63,27 @@ def print_word(guess, word, obj):
 	print()
 	return obj
 
+# def fill_wordLib():
+# 	word_lib = WordLib()
+# 	with open(FILENAME, OPEN_MODE) as file:
+# 		for line in file:
+# 			line = line.strip()
+# 			if line:
+# 				word_lib.add_word(line)
+# 	return word_lib
+
 def fill_wordLib():
-	word_lib = WordLib()
-	with open(FILENAME, OPEN_MODE) as file:
-		for line in file:
-			line = line.strip()
-			if line:
-				word_lib.add_word(line)
-	return word_lib
+    word_lib = WordLib()
+    try:
+        with open(FILENAME, OPEN_MODE) as file:
+            for line in file:
+                line = line.strip()
+                if line:
+                    word_lib.add_word(line)
+    except FileNotFoundError:
+        print(f"Error: The file '{FILENAME}' was not found.")
+        return None
+    except IOError as e:
+        print(f"Error: An IOError occurred. Details: {e}")
+        return None
+    return word_lib
