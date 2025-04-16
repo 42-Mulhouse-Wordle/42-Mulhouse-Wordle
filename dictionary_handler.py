@@ -26,8 +26,17 @@ class WordLib:
 		self.previous_guesses.append(guess)
 
 	def get_previous_guesses(self, word):
+		custom_theme = Theme(
+		    {"info": "cyan", "placed": "bold bright_green", "correct": "bold bright_yellow", "wrong": "bright_black"}
+		)
+		console = Console(theme=custom_theme)
+		console.clear()
+		console.rule(TITLE)
+		console.print()
 		for guess in self.previous_guesses:
 			self = print_word(guess, word, self)
+		for i in range(self.tries_left - 1):
+			console.print("- - - - -", justify="center")
 		styled_alphabet = []
 		for letter in range(ord('a'), ord('z') + 1):
 			if chr(letter) in self.green:
@@ -39,7 +48,9 @@ class WordLib:
 			else:
 				style = "normal"
 			styled_alphabet.append(f"[{style}]{chr(letter).upper()}[/]")
+		Console().print()
 		Console().print(" ".join(styled_alphabet), justify="center")
+		Console().print()
 
 	def add_word(self, word):
 		self.words.append(word)
@@ -101,7 +112,14 @@ def print_screen():
 	console = Console(theme=custom_theme)
 	console.clear()
 	console.rule(TITLE)
+	console.print()
 	for i in range(6):
 		console.print("- - - - -", justify="center")
+	styled_alphabet = []
+	for letter in range(ord('a'), ord('z') + 1):
+		styled_alphabet.append(f"[normal]{chr(letter).upper()}[/]")
+	
+	console.print()
+	console.print(" ".join(styled_alphabet), justify="center")
+	console.print()
 	return console
-
