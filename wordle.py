@@ -1,4 +1,5 @@
 import random
+import signal
 from rich.theme import Theme
 from rich.console import Console
 from rich.table import Table
@@ -11,6 +12,7 @@ HEADER = "Guesses"
 LOSS_MESSAGE = "You lost, the word was: "
 EOF_CATCH = "End of File detected, exiting...\n"
 NEW_LINE = "\n"
+SIGINT_CATCH = "\nSIGINT detected, exiting...\n"
 
 def setup_console():
 	custom_theme = Theme(
@@ -41,9 +43,13 @@ def run_game(word, word_lib):
 
 def main():
 	word_lib = fill_wordLib()
-	if word_lib:
-		word = random.choice(word_lib.words)
-		setup_console()
-		run_game(word, word_lib)
+	try:
+		if word_lib:
+			word = random.choice(word_lib.words)
+			setup_console()
+			run_game(word, word_lib)
+	except KeyboardInterrupt:
+		print(SIGINT_CATCH)
+		print(LOSS_MESSAGE + word.upper())
 
 main()
