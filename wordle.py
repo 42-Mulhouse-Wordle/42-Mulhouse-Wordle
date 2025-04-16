@@ -1,32 +1,12 @@
 import random
-import signal
-from rich.theme import Theme
-from rich.console import Console
-from rich.table import Table
 from checker import check_word
-from dictionary_handler import fill_wordLib
+from dictionary_handler import fill_wordLib, print_screen
 
 GUESS_PROMPT = "input: "
-TITLE = ":writing_hand: :brain: :bulb: [info]Wordle[/] :bulb: :brain: :writing_hand:\n"
-HEADER = "Guesses"
 LOSS_MESSAGE = "You lost, the word was: "
 EOF_CATCH = "End of File detected, exiting...\n"
 NEW_LINE = "\n"
 SIGINT_CATCH = "\nSIGINT detected, exiting...\n"
-
-def setup_console():
-	custom_theme = Theme(
-	    {"info": "cyan", "placed": "bold bright_green", "correct": "bold bright_yellow", "wrong": "bright_black"}
-	)
-	console = Console(theme=custom_theme)
-	console.clear()
-	console.rule(TITLE)
-	table = Table()
-	table.add_column(HEADER, style="wrong", justify="center")
-	for i in range(6):
-		table.add_row("- - - - -")
-	console.print(table, justify="center")
-	return console
 
 def run_game(word, word_lib):
 	while word_lib.guessing and word_lib.tries_left > 0:
@@ -46,7 +26,7 @@ def main():
 	try:
 		if word_lib:
 			word = random.choice(word_lib.words)
-			setup_console()
+			print_screen()
 			run_game(word, word_lib)
 	except KeyboardInterrupt:
 		print(SIGINT_CATCH)

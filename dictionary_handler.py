@@ -1,3 +1,4 @@
+from rich.theme import Theme
 from rich.console import Console
 
 FILENAME = 'words.txt'
@@ -6,6 +7,7 @@ NB_TRIES = 6
 FILE_NOT_FOUND = "Error: The file '{}' was not found."
 IO_ERROR = "Error: An IOError occurred. Details: {}"
 DIC_CORRUPT_ERROR = "The dictionary file is corrupted: '{}' at line {}"
+TITLE = ":writing_hand: :brain: :bulb: [info]Wordle[/] :bulb: :brain: :writing_hand:\n"
 
 class WordLib:
 	def __init__(self):
@@ -24,8 +26,17 @@ class WordLib:
 		self.previous_guesses.append(guess)
 
 	def get_previous_guesses(self, word):
+		custom_theme = Theme(
+		    {"info": "cyan", "placed": "bold bright_green", "correct": "bold bright_yellow", "wrong": "bright_black"}
+		)
+		console = Console(theme=custom_theme)
+		console.clear()
+		console.rule(TITLE)
+		console.print()
 		for guess in self.previous_guesses:
 			self = print_word(guess, word, self)
+		for i in range(self.tries_left - 1):
+			console.print("- - - - -", justify="center")
 		styled_alphabet = []
 		for letter in range(ord('a'), ord('z') + 1):
 			if chr(letter) in self.green:
@@ -37,27 +48,29 @@ class WordLib:
 			else:
 				style = "normal"
 			styled_alphabet.append(f"[{style}]{chr(letter).upper()}[/]")
+		Console().print()
 		Console().print(" ".join(styled_alphabet), justify="center")
+		Console().print()
 
 	def add_word(self, word):
 		self.words.append(word)
 
 def print_word(guess, word, obj):
-	i = 0
-	l = 0
-	k = []
+	guess_index = 0
+	letter_index = 0
+	correct_indices = []
 	for letter in guess:
-		if letter in word and letter == word[l]:
-			word = word[:l] + word[l + 1:]
+		if letter in word and letter == word[letter_index]:
+			word = word[:letter_index] + word[letter_index + 1:]
 			obj.green.append(letter)
-			k.append(i)
-			l -= 1
-		l += 1
-		i += 1
-	i = 0
+			correct_indices.append(guess_index)
+			letter_index -= 1
+		letter_index += 1
+		guess_index += 1
+	styled_word_index = 0
 	styled_word = []
 	for letter in guess:
-		if i in k:
+		if styled_word_index in correct_indices:
 			style = "bold bright_green"
 		elif letter in word:
 			obj.yellow.append(letter)
@@ -67,7 +80,7 @@ def print_word(guess, word, obj):
 			obj.grey.append(letter)
 			style = "bold bright_black"
 		styled_word.append(f"[{style}]{letter.upper()}[/]")
-		i += 1
+		styled_word_index += 1
 	Console().print(" ".join(styled_word), justify="center")
 	return obj
 
@@ -91,3 +104,22 @@ def fill_wordLib():
         print(IO_ERROR.format(e))
         return None
     return word_lib
+
+def print_screen():
+	custom_theme = Theme(
+	    {"info": "cyan", "placed": "bold bright_green", "correct": "bold bright_yellow", "wrong": "bright_black"}
+	)
+	console = Console(theme=custom_theme)
+	console.clear()
+	console.rule(TITLE)
+	console.print()
+	for i in range(6):
+		console.print("- - - - -", justify="center")
+	styled_alphabet = []
+	for letter in range(ord('a'), ord('z') + 1):
+		styled_alphabet.append(f"[normal]{chr(letter).upper()}[/]")
+	
+	console.print()
+	console.print(" ".join(styled_alphabet), justify="center")
+	console.print()
+	return console
