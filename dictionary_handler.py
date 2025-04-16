@@ -63,15 +63,6 @@ def print_word(guess, word, obj):
 	print()
 	return obj
 
-# def fill_wordLib():
-# 	word_lib = WordLib()
-# 	with open(FILENAME, OPEN_MODE) as file:
-# 		for line in file:
-# 			line = line.strip()
-# 			if line:
-# 				word_lib.add_word(line)
-# 	return word_lib
-
 def fill_wordLib():
     word_lib = WordLib()
     try:
