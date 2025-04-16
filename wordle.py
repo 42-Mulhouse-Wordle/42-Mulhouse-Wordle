@@ -11,7 +11,7 @@ SIGINT_CATCH = "\n[bright_red]SIGINT detected, exiting...\n"
 def run_game(word, word_lib):
 	while word_lib.guessing and word_lib.tries_left > 0:
 		try:
-			guess = Console().input(GUESS_PROMPT)
+			guess = Console().input(GUESS_PROMPT).strip()
 		except EOFError:
 			Console().clear()
 			Console().print(EOF_CATCH)
