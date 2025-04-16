@@ -1,5 +1,8 @@
 from rich.console import Console
+<<<<<<< HEAD
 
+=======
+>>>>>>> 08f1125 (Feature: Add justifed alphabet)
 FILENAME = 'words.txt'
 OPEN_MODE = 'r'
 NB_TRIES = 6
@@ -27,6 +30,10 @@ class WordLib:
 			self = print_word(guess, word, self)
 		styled_alphabet = []
 		for letter in range(ord('a'), ord('z') + 1):
+<<<<<<< HEAD
+=======
+			style = ""
+>>>>>>> 08f1125 (Feature: Add justifed alphabet)
 			if chr(letter) in self.green:
 				style = "bold bright_green"
 			elif chr(letter) in self.yellow:

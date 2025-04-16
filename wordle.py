@@ -18,7 +18,11 @@ def print_console():
 	console.clear()
 	console.rule(TITLE)
 	table = Table()
+<<<<<<< HEAD
 	table.add_column(HEADER, style="wrong", justify="center")
+=======
+	table.add_column("Guesses", style="wrong", justify="center")
+>>>>>>> 08f1125 (Feature: Add justifed alphabet)
 	for i in range(6):
 		table.add_row("- - - - -")
 	console.print(table, justify="center")
