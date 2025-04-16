@@ -36,8 +36,9 @@ def run_game(word, word_lib):
 
 def main():
 	word_lib = fill_wordLib()
-	word = random.choice(word_lib.words)
-	init_console()
-	run_game(word, word_lib)
+	if word_lib:
+		word = random.choice(word_lib.words)
+		init_console()
+		run_game(word, word_lib)
 
 main()
