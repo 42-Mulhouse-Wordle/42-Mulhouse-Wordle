@@ -10,6 +10,7 @@ TITLE = ":writing_hand: :brain: :bulb: [info]Wordle[/] :bulb: :brain: :writing_h
 HEADER = "Guesses"
 LOSS_MESSAGE = "You lost, the word was: "
 EOF_CATCH = "End of File detected, exiting...\n"
+NEW_LINE = "\n"
 
 def print_console():
 	custom_theme = Theme(
@@ -38,7 +39,7 @@ def run_game(word, word_lib):
 			print(EOF_CATCH)
 			word_lib.tries_left = 0
 			break
-		print("\n")
+		print(NEW_LINE)
 		word_lib = check_word(word, guess, word_lib)
 	if word_lib.tries_left == 0:
 		print(LOSS_MESSAGE + word.upper())
