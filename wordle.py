@@ -26,7 +26,7 @@ def main():
 	try:
 		if word_lib:
 			word = random.choice(word_lib.words)
-			print_screen()
+			print_screen(len(word_lib.words))
 			run_game(word, word_lib)
 	except KeyboardInterrupt:
 		print(SIGINT_CATCH)
