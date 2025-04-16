@@ -9,6 +9,8 @@ GUESS_PROMPT = "input: "
 TITLE = ":writing_hand: :brain: :bulb: [info]Wordle[/] :bulb: :brain: :writing_hand:\n"
 HEADER = "Guesses"
 LOSS_MESSAGE = "You lost, the word was: "
+EOF_CATCH = "End of File detected, exiting...\n"
+NEW_LINE = "\n"
 
 def print_console():
 	custom_theme = Theme(
@@ -39,7 +41,13 @@ def print_console():
 
 def run_game(word, word_lib):
 	while word_lib.guessing and word_lib.tries_left > 0:
-		guess = input(GUESS_PROMPT)
+		try:
+			guess = input(GUESS_PROMPT)
+		except EOFError:
+			print(EOF_CATCH)
+			word_lib.tries_left = 0
+			break
+		print(NEW_LINE)
 		word_lib = check_word(word, guess, word_lib)
 	if word_lib.tries_left == 0:
 		print(LOSS_MESSAGE + word.upper())
